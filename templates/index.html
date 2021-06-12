@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp</title>
+</head>
+<!--<body style="background-image: linear-gradient(to right, #708090, black, black, #708090)"></!-->
+<body style="background-color: black;">
+    <center style="color: azure;">
+        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+            ChatApp
+        </h1>
+        <form class="form" style="font-family: Arial, Helvetica, sans-serif;" enctype="multipart/form-data" method="POST">
+            <label for="text_msg">Enter Text: </label>
+            <input type="text" class="form-control" id="text_msg" name="text_msg" maxlength="1024">
+            
+            <label for="convo_hash">Enter Conversation ID: </label>
+            <input type="text" class="form-control" id="convo_hash" name="convo_hash" value="{}" maxlength="32">
+
+            <label for="key_file">Enter Key File: </label>
+            <input type="file" class="form-control" id="key_file" name="key_file" value="{}">
+            
+            <p>
+                <input type="submit" value="Send">
+            </p>
+        </form>
+        <a style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+            {}
+        </a>
+    </center>
+</body>
+<footer style="position:fixed;bottom: 10px;left:0;right:0;height:30px; background-color: aliceblue;">
+    <center>
+        <a href="/info/" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Info/Guide</a>
+    </center>
+</footer>
+</html>
