@@ -26,9 +26,9 @@ class Message:
             except:
                 strmsg = '<message sent with different key>'
             if i % 2 == 0:
-                s += f'<p>{msg.user} <textarea readonly resize: none; overflow: auto; cols="70" rows="2" style="background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea></p>\n'
+                s += '<p' + (' style = "color: blue;"' if msg.encrypted else '') + f'>{msg.user} <textarea readonly resize: none; overflow: auto; cols="70" rows="2" style="background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea></p>\n'
             else:
-                s += f'<p><textarea readonly resize: none; overflow: auto; cols="70" rows="2" style="background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea> {msg.user}</p>\n'
+                s += '<p' + (' style = "color: blue;"' if msg.encrypted else '') + f'><textarea readonly resize: none; overflow: auto; cols="70" rows="2" style="background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea> {msg.user}</p>\n'
 
         return s
 
