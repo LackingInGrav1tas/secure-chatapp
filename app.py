@@ -3,6 +3,7 @@ from messages import Message, random_string
 import crypto
 
 app = Flask(__name__)
+server_id = random_string(10)
 log = {
     '0000': list() # general 
 }
@@ -30,7 +31,7 @@ def index():
             )
         convo_hash = request.form['convo_hash']
         message = Message.fmt(key, log[request.form["convo_hash"]])
-    return render_template("index.html").format(convo_hash, key_file, message)
+    return render_template("index.html").format(convo_hash, key_file, message, server_id)
 
 @app.route('/info/')
 def info():
