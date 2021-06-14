@@ -1,15 +1,23 @@
 from flask import Flask, render_template, request
 from messages import Message, random_string
 import crypto
+import redis
+import os
+import pickle
 
 app = Flask(__name__)
 server_id = random_string(10)
+REDIS_URL = os.environ['REDIS_URL']
+REDIS_CHAN = 'chat'
+r = redis.from_url(REDIS_URL)
 log = {
     '0000': list() # general 
 }
+r.set('log', pickle.dumps(log))
 
 @app.route('/', methods=["GET", "POST"])
 def index():
+    log = pickle.loads(r.get('log'))
     message = ''
     convo_hash = '0000'
     key_file = ''
@@ -31,6 +39,7 @@ def index():
             )
         convo_hash = request.form['convo_hash']
         message = Message.fmt(key, log[request.form["convo_hash"]])
+        r.set('log', pickle.dumps(log))
     return render_template("index.html").format(convo_hash, key_file, message, server_id)
 
 @app.route('/info/')

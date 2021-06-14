@@ -1,4 +1,5 @@
 gunicorn
+redis
 flask
 datetime
 pycryptodome
