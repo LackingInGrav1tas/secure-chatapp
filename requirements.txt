@@ -4,3 +4,4 @@ flask
 datetime
 pycryptodome
 werkzeug
+logging

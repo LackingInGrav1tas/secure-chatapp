@@ -4,6 +4,7 @@ import crypto
 import redis
 import os
 import pickle
+import logging
 
 app = Flask(__name__)
 server_id = random_string(10)
