@@ -40,6 +40,8 @@ def index():
         convo_hash = request.form['convo_hash']
         message = Message.fmt(key, log[request.form["convo_hash"]])
         r.set('log', pickle.dumps(log))
+    if request.method == 'GET':
+        message = Message.fmt('', log['0000'])
     return render_template("index.html").format(convo_hash, key_file, message, server_id)
 
 @app.route('/info/')
