@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, make_response
 from messages import Message, random_string
 import crypto
 import redis
@@ -64,9 +64,14 @@ def info():
 @app.route('/get_info/<id>/')
 def get_info(id):
     log = pickle.loads(r.get('log'))
-    return jsonify(
-        {'log': Message.fmt('', log[id])}
+    response = make_response(
+        jsonify(
+            {'log': Message.fmt('', log[id])}
+        ),
+        401,
     )
+    response.headers["Content-Type"] = "application/json"
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True)
