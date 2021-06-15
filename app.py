@@ -68,7 +68,6 @@ def get_info(id):
         jsonify(
             {'log': Message.fmt('', log[id])}
         ),
-        401,
     )
     response.headers["Content-Type"] = "application/json"
     return response
