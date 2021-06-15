@@ -21,10 +21,10 @@ function update() {
         let id = document.getElementById('convo_hash').value
         let r = await fetch('e2ee-chat-app.herokuapp.com/get_info/' + id);
         if (r.ok) {
-            var data = await r.json();
+            let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
+            window.alert('one interval id: ' + id + ' data: ' + data.log);
         }
-        window.alert('one interval id: ' + id + ' data: ' + data.log);
     }, 30000);
 }"""
 
