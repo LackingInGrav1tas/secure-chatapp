@@ -4,23 +4,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatApp Guide</title>
+    <title>ChatApp Info</title>
 </head>
-<body style="background-color: black; font-family: Verdana, Geneva, Tahoma, sans-serif; color: white;">
-    <center>
-        <h1>
-            ChatApp Guide
-        </h1>
+<!--<body style="background-image: linear-gradient(to right, #708090, black, black, #708090)"></!-->
+<body style="background-color: black;">
+    <div style="background-color: #f3f3f3; display: flex; align-items: left; justify-content: left;">
+        <div style="flex-basis: 40%;">
+            <img style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: x-large; text-align: center;" src="/static/resized_logo.png" alt="E2EE Chat App">
+            <a href="/info/" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: black; text-decoration: none;">Info</a>
+            <a> | </a>
+            <a href="/" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: black; text-decoration: none;">Home</a>
+        </div>
+        <div style="font-size: 20px; padding-left: 20px;"><p style="font-family: Verdana, Geneva, Tahoma, sans-serif;"></p></div>
+    </div>
+    <center style="color: azure; font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        <hr>
+        <center>
+            <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                E2EE ChatApp Guide
+            </h1>
+        </center>
+        <hr>
+        <p>
+            Conversations are stored by their identification ID, which can be any string >= 32 characters.
+            When a message is sent with an empty "Enter Text" form, it just loads the conversation. The conversation
+            is stored in an encrypted state, so it uses the key file to decrypt it. If your "Enter Key File" field is empty,
+            your message will not be encrypted and can be viewed by anyone with any key.
+        </p>
+        <p>
+            All AES keys are expected to be 16 bits in length. If a message in the conversation was encrypted with a 
+            different key, it's message will not appear.
+        </p>
     </center>
-    <p>
-        Conversations are stored by their identification ID, which can be any string >= 32 characters.
-        When a message is sent with an empty "Enter Text" form, it just loads the conversation. The conversation
-        is stored in an encrypted state, so it uses the key file to decrypt it. If your "Enter Key File" field is empty,
-        your message will not be encrypted and can be viewed by anyone with any key.
-    </p>
-    <p>
-        All AES keys are expected to be 16 bits in length. If a message in the conversation was encrypted with a 
-        different key, it's message will not appear.
-    </p>
 </body>
+<footer style="position:fixed;bottom: 0;left:0;right:0;height:20px; background-color: aliceblue;">
+    <a href="https://github.com/LackingInGrav1tas/e2ee-chat-app" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: black; text-decoration: none;">source code</a>
+</footer>
 </html>
