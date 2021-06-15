@@ -46,5 +46,9 @@ def index():
 def info():
     return render_template("info.html")
 
+@app.route('/favicon.ico')
+def icon():
+    return 
+
 if __name__ == '__main__':
     app.run(debug=True)
