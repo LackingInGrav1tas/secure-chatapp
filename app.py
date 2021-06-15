@@ -63,6 +63,7 @@ def info():
 
 @app.route('/get_info/<id>/')
 def get_info(id):
+    print(f"ID: {id}")
     log = pickle.loads(r.get('log'))
     return Message.fmt('', log[id])
 
