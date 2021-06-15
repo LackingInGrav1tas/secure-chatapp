@@ -24,7 +24,7 @@ function update() {
             let data = await r.text();
             document.getElementById('txt-log').innerHTML = data;
         }
-        window.alert('one interval id: ' + id);
+        window.alert('one interval id: "' + id + '"\ndata: ' + data);
     }, 30000);
 }"""
 
