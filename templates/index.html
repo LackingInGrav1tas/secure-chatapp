@@ -5,13 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatApp</title>
+    <style>
+        .container {
+        display: flex;
+        align-items: left;
+        justify-content: left
+        }
+
+        img {
+        max-width: 100%
+        }
+
+        .image {
+        flex-basis: 40%
+        }
+
+        .text {
+        font-size: 20px;
+        padding-left: 20px;
+        }
+    </style>
 </head>
 <!--<body style="background-image: linear-gradient(to right, #708090, black, black, #708090)"></!-->
 <body style="background-color: black;">
+    <div style="background-color:floralwhite;" class="container">
+        <div class="image"><img src="resized_logo.png" alt="ChatApp logo"></div>
+        <div class="text"><p style="font-family: Verdana, Geneva, Tahoma, sans-serif;"></p></div>
+    </div>
     <center style="color: azure;">
-        <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-            ChatApp
-        </h1>
+        <hr>
         <form class="form" style="font-family: Arial, Helvetica, sans-serif;" enctype="multipart/form-data" method="POST">
             <label for="text_msg">Enter Text: </label>
             <input type="text" class="form-control" id="text_msg" name="text_msg" maxlength="1024">
@@ -26,6 +48,7 @@
                 <input type="submit" value="Send">
             </p>
         </form>
+        <hr>
         <a style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
             {}
         </a>
