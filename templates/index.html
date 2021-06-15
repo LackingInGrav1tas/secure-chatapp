@@ -7,18 +7,8 @@
     <title>ChatApp</title>
     <link rel="shortcut icon" href="static/favicon.ico">
 </head>
-<script>
-function update() {{
-    setInterval(async function() {{
-        let id = document.getElementById('convo_hash').value
-        let r = await fetch('e2ee-chat-app.herokuapp.com/get_info/' + id);
-        if (r.ok) {{
-            let data = await r.text();
-            document.getElementById('txt-log').innerHTML = data;
-        }}
-    }}, 30000)
-}}
-</script>
+<script src="update.js"></script>
+
 <body style="background-color:#323233" onload="update();">
     <div style="background-color: #f3f3f3; display: flex; align-items: left; justify-content: left;">
         <div style="flex-basis: 40%;">
