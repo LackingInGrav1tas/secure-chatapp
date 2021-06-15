@@ -48,10 +48,10 @@ def index():
 def info():
     return render_template("info.html")
 
-@app.route('/get_info/')
-def get_info():
+@app.route('/get_info/<id>/')
+def get_info(id):
     log = pickle.loads(r.get('log'))
-    return Message.fmt('', log)
+    return Message.fmt('', log[id])
 
 if __name__ == '__main__':
     app.run(debug=True)
