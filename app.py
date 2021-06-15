@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from messages import Message, random_string
 import crypto
 import redis
@@ -21,8 +21,8 @@ function update() {
         let id = document.getElementById('convo_hash').value
         let r = await fetch('e2ee-chat-app.herokuapp.com/get_info/' + id);
         if (r.ok) {
-            var data = await r.text();
-            document.getElementById('txt-log').innerHTML = data;
+            var data = await r.json();
+            document.getElementById('txt-log').innerHTML = data.log;
         }
         window.alert('one interval id: ' + id + ' data: ' + data);
     }, 30000);
@@ -64,7 +64,9 @@ def info():
 @app.route('/get_info/<id>/')
 def get_info(id):
     log = pickle.loads(r.get('log'))
-    return Message.fmt('', log[id])
+    return jsonify(
+        {'log': Message.fmt('', log[id])}
+    )
 
 if __name__ == '__main__':
     app.run(debug=True)
