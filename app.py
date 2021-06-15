@@ -48,7 +48,8 @@ def info():
 
 @app.route('/favicon.ico')
 def icon():
-    return 
+    f = open('favicon.ico', 'r')
+    return f.read()
 
 if __name__ == '__main__':
     app.run(debug=True)
