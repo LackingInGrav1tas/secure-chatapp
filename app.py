@@ -24,7 +24,7 @@ function update() {
             let data = await r.text();
             document.getElementById('txt-log').innerHTML = data;
         }
-        window.alert('one interval');
+        window.alert('one interval id: ' + id);
     }, 30000);
 }"""
 
@@ -63,7 +63,6 @@ def info():
 
 @app.route('/get_info/<id>/')
 def get_info(id):
-    print(f"ID: {id}")
     log = pickle.loads(r.get('log'))
     return Message.fmt('', log[id])
 
