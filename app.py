@@ -15,6 +15,18 @@ log = {
 }
 r.set('log', pickle.dumps(log))
 
+update_code = """
+function update() {
+    setInterval(async function() {
+        let id = document.getElementById('convo_hash').value
+        let r = await fetch('e2ee-chat-app.herokuapp.com/get_info/' + id);
+        if (r.ok) {
+            let data = await r.text();
+            document.getElementById('txt-log').innerHTML = data;
+        }
+    }, 30000)
+}"""
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     log = pickle.loads(r.get('log'))
@@ -42,7 +54,7 @@ def index():
         r.set('log', pickle.dumps(log))
     if request.method == 'GET':
         message = Message.fmt('', log['0000'])
-    return render_template("index.html").format('', convo_hash, key_file, message, server_id)
+    return render_template("index.html").format(update_code, '', convo_hash, key_file, message, server_id)
 
 @app.route('/info/')
 def info():
