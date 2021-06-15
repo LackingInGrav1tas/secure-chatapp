@@ -28,10 +28,10 @@
         </center>
         <hr>
         <p>
-            Conversations are stored by their identification ID, which can be any string >= 32 characters.
+            Conversations are stored by their identification ID, which can be any string with # of characters <= 32 .
             When a message is sent with an empty "Enter Text" form, it just loads the conversation. The conversation
             is stored in an encrypted state, so it uses the key file to decrypt it. If your "Enter Key File" field is empty,
-            your message will not be encrypted and can be viewed by anyone with any key.
+            your message will not be encrypted and <a style="color: red;">can be viewed by anyone with any key</a>.
         </p>
         <p>
             All AES keys are expected to be 16 bits in length. If a message in the conversation was encrypted with a 
