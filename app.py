@@ -24,7 +24,8 @@ function update() {
             let data = await r.text();
             document.getElementById('txt-log').innerHTML = data;
         }
-    }, 30000)
+        window.alert('one interval');
+    }, 30000);
 }"""
 
 @app.route('/', methods=["GET", "POST"])
