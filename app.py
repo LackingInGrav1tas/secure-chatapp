@@ -24,7 +24,7 @@ function update() {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
         }
-    }, 30000);
+    }, 5000);
 }"""
 
 @app.route('/', methods=["GET", "POST"])
