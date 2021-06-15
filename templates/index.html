@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="60">
     <title>ChatApp</title>
     <link rel="shortcut icon" href="static/favicon.ico">
 </head>
-<body style="background-color:#323233">
+<script>
+function update() {
+    setInterval(async function() {
+        let r = await fetch('e2ee-chat-app.herokuapp.com/get_info/');
+        if (r.ok) {
+            let data = await r.text();
+            document.getElementById('txt-log').innerHTML = data;
+        }
+    }, 30000)
+}
+</script>
+<body style="background-color:#323233" onload="update();">
     <div style="background-color: #f3f3f3; display: flex; align-items: left; justify-content: left;">
         <div style="flex-basis: 40%;">
             <img style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: x-large; text-align: center;" src="/static/resized_logo.png" alt="E2EE Chat App">
@@ -24,7 +34,7 @@
         <hr>
         <form class="form" style="font-family: Arial, Helvetica, sans-serif;" enctype="multipart/form-data" method="POST">
             <label for="text_msg">Enter Text: </label>
-            <input type="text" class="form-control" id="text_msg" name="text_msg" maxlength="1024">
+            <input type="text" class="form-control" id="text_msg" name="text_msg" maxlength="1024" value={}>
             
             <label for="convo_hash">Enter Conversation ID: </label>
             <input type="text" class="form-control" id="convo_hash" name="convo_hash" value="{}" maxlength="32">
@@ -35,7 +45,7 @@
             <input type="submit" value="Send Message">
         </form>
         <hr>
-        <a style="font-family: Verdana, Geneva, Tahoma, sans-serif;">
+        <a style="font-family: Verdana, Geneva, Tahoma, sans-serif;" id="txt-log">
             {}
         </a>
     </center>

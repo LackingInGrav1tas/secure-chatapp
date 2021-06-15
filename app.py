@@ -42,11 +42,16 @@ def index():
         r.set('log', pickle.dumps(log))
     if request.method == 'GET':
         message = Message.fmt('', log['0000'])
-    return render_template("index.html").format(convo_hash, key_file, message, server_id)
+    return render_template("index.html").format('', convo_hash, key_file, message, server_id)
 
 @app.route('/info/')
 def info():
     return render_template("info.html")
+
+@app.route('/get_info/')
+def get_info():
+    log = pickle.loads(r.get('log'))
+    return Message.fmt('', log)
 
 if __name__ == '__main__':
     app.run(debug=True)
