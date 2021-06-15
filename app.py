@@ -24,7 +24,7 @@ function update() {
             var data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
         }
-        window.alert('one interval id: ' + id + ' data: ' + data);
+        window.alert('one interval id: ' + id + ' data: ' + data.log);
     }, 30000);
 }"""
 
