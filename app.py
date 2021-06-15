@@ -20,10 +20,9 @@ function update() {
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
         let r = await fetch('/get_info/' + id);
-        if (r.ok) {
+        if (r.ok && document.getElementById('checkbox').checked == True) {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
-            window.alert('one interval id: ' + id + ' data: ' + data.log);
         }
     }, 30000);
 }"""
