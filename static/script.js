@@ -26,7 +26,6 @@ function getKey() {
         let reader = new FileReader();
         reader.onload = (e) => {
             contents = e.target.result;
-            console.log('contents: "' + contents + '"')
         };
         reader.readAsText(document.getElementById('key_file').files[0]);
     }
@@ -35,7 +34,8 @@ function getKey() {
 
 async function handleForm(event) {
     event.preventDefault();    
-
+    key = getKey();
+    console.log(key)
     await fetch('/send_msg', {
         method: "POST",
         headers: {
@@ -43,7 +43,7 @@ async function handleForm(event) {
         },
         body: JSON.stringify(
             {
-                key: getKey(),
+                key: key,
                 convo_id: document.getElementById('convo_hash').value,
                 msg: document.getElementById('text_msg').value
             }

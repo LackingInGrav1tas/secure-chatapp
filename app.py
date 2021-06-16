@@ -68,7 +68,7 @@ def send_msg():
         Message(
             str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
             crypto.encrypt(data['key'], (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
-            len(data['key'])!=0
+            len(data['key']) != 0
         )
     )
     r.set('log', pickle.dumps(log))
