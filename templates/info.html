@@ -34,9 +34,14 @@
             your message will not be encrypted and <a style="color: red;">can be viewed by anyone with any key</a>.
         </p>
         <p>
+            Beside each message is a 10-character-long identification string. This is generated using a sha256 hash of
+            the user who sent it's IP.
+        </p>
+        <p>
             All AES keys are expected to be 16 bits in length. If a message in the conversation was encrypted with a 
             different key, it's message will not appear.
         </p>
+
     </center>
 </body>
 <footer style="position:fixed;bottom: 0;left:0;right:0;height:20px; background-color: aliceblue;">
