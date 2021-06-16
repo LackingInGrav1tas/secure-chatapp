@@ -17,7 +17,7 @@ async function handleForm(event) {
     };
     reader.readAsText(document.getElementById('key_file').files[0]);
 
-    await fetch('/send_msg/', {
+    await fetch('/send_msg', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
