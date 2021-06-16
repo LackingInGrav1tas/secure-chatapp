@@ -1,4 +1,4 @@
-function getKey() {
+async function getKey() {
     let contents = '';
     if (document.getElementById('key_file').files.length > 0) {
         let reader = new FileReader();
