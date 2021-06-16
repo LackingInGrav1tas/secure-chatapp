@@ -29,14 +29,12 @@ function getKey() {
         };
         reader.readAsText(document.getElementById('key_file').files[0]);
     }
+    console.log(document.getElementById('key_file').files.length);
     return contents;
 }
 
 async function handleForm(event) {
     event.preventDefault();    
-
-    let key = getKey();
-    window.alert(key);
 
     await fetch('/send_msg', {
         method: "POST",
@@ -45,7 +43,7 @@ async function handleForm(event) {
         },
         body: JSON.stringify(
             {
-                key: key,
+                key: getKey(),
                 convo_id: document.getElementById('convo_hash').value,
                 msg: document.getElementById('text_msg').value
             }
