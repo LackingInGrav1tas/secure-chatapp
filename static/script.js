@@ -1,3 +1,17 @@
+function getKey() {
+    let contents = '';
+    if (document.getElementById('key_file').files.length > 0) {
+        let reader = new FileReader();
+        contents = await new Promise((resolve) => {
+            reader.onload = (e) => {
+                resolve(e.target.result);
+            };
+            reader.readAsText(document.getElementById('key_file').files[0]);
+        });
+    }
+    return contents;
+}
+
 function update() {
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
@@ -18,19 +32,6 @@ function update() {
             document.getElementById('txt-log').innerHTML = data.log;
         }
     }, 1000);
-}
-
-function getKey() {
-    let contents = '';
-    if (document.getElementById('key_file').files.length > 0) {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            contents = e.target.result;
-            console.log('in onload: ' + contents);
-        };
-        reader.readAsText(document.getElementById('key_file').files[0]);
-    }
-    return contents;
 }
 
 async function handleForm(event) {
