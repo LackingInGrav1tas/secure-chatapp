@@ -15,7 +15,7 @@ async function handleForm(event) {
     reader.onload = (e) => {
         contents = e.target.result;
     };
-    reader.readAsText(event.target.files[0]);
+    reader.readAsText(document.getElementById('key_file').files[0]);
 
     await fetch('/send_msg/', {
         method: "POST",
