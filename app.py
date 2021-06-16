@@ -25,7 +25,28 @@ function update() {
             document.getElementById('txt-log').innerHTML = data.log;
         }
     }, 5000);
-}"""
+}
+function form_action() {
+    var form = document.getElementById('msg-form');
+    async function handleForm(event) {
+        await fetch('/send_msg/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: {
+                JSON.stringify({
+                    key: 
+                    convo_id: document.getElementById('convo_hash').value
+                    msg: document.getElementById('text_msg').value
+                })
+            }
+        });
+        event.preventDefault();
+    }
+    form.addEventListener('submit', handleForm);
+}
+"""
 
 @app.route('/', methods=["GET", "POST"])
 def index():
@@ -70,6 +91,25 @@ def get_info(id):
     )
     response.headers["Content-Type"] = "application/json"
     return response
+
+@app.route('/send_msg/', methods=["POST"])
+def send_msg():
+    data = request.get_json()
+    key = ''
+    if 'key' in data:
+        key = data['key']
+    message = data['msg']
+    convo_id = data['convo_id']
+    log = pickle.loads(r.get('log'))
+    log[convo_id].insert(0, 
+        Message(
+            str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
+            crypto.encrypt(key, (message + '.').encode('utf-8')) if len(key) != 0 else message,
+            len(key)!=0
+        )
+    )
+    r.set('log', pickle.dumps(log))
+    return "success"
 
 if __name__ == '__main__':
     app.run(debug=True)
