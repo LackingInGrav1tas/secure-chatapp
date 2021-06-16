@@ -1,7 +1,7 @@
 function update() {
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
-        let r = await fetch('/get_info/' + id, {
+        let r = await fetch('/get_info/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
