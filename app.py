@@ -15,39 +15,6 @@ log = {
 }
 r.set('log', pickle.dumps(log))
 
-update_code = """
-function update() {
-    setInterval(async function() {
-        let id = document.getElementById('convo_hash').value
-        let r = await fetch('/get_info/' + id);
-        if (r.ok && document.getElementById('checkbox').checked == true) {
-            let data = await r.json();
-            document.getElementById('txt-log').innerHTML = data.log;
-        }
-    }, 1000);
-}
-function form_action() {
-    var form = document.getElementById('msg-form');
-    async function handleForm(event) {
-        await fetch('/send_msg/', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: {
-                JSON.stringify({
-                    key: 
-                    convo_id: document.getElementById('convo_hash').value
-                    msg: document.getElementById('text_msg').value
-                })
-            }
-        });
-        event.preventDefault();
-    }
-    form.addEventListener('submit', handleForm);
-}
-"""
-
 @app.route('/', methods=["GET", "POST"])
 def index():
     log = pickle.loads(r.get('log'))
@@ -75,7 +42,7 @@ def index():
         r.set('log', pickle.dumps(log))
     if request.method == 'GET':
         message = Message.fmt('', log['0000'])
-    return render_template("index.html").format(update_code, '', convo_hash, key_file, message, server_id)
+    return render_template("index.html").format('', convo_hash, key_file, message, server_id)
 
 @app.route('/info/')
 def info():
