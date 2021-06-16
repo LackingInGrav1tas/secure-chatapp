@@ -26,10 +26,10 @@ function getKey() {
         let reader = new FileReader();
         reader.onload = (e) => {
             contents = e.target.result;
+            console.log('contents: "' + contents + '"')
         };
         reader.readAsText(document.getElementById('key_file').files[0]);
     }
-    console.log(document.getElementById('key_file').files.length);
     return contents;
 }
 
