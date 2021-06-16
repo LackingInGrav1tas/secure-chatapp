@@ -12,7 +12,7 @@ async function getKey() {
     return contents;
 }
 
-function update() {
+async function update() {
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
         let r = await fetch('/get_info/', {
@@ -22,7 +22,7 @@ function update() {
             },
             body: JSON.stringify(
                 {
-                    key: getKey(),
+                    key: await getKey(),
                     convo_id: document.getElementById('convo_hash').value,
                 }
             )
@@ -36,7 +36,7 @@ function update() {
 
 async function handleForm(event) {
     event.preventDefault();    
-    key = getKey();
+    key = await getKey();
     console.log('key: ' + key)
     await fetch('/send_msg', {
         method: "POST",
