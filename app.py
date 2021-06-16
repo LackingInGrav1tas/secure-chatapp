@@ -24,7 +24,7 @@ function update() {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
         }
-    }, 5000);
+    }, 1000);
 }
 function form_action() {
     var form = document.getElementById('msg-form');
