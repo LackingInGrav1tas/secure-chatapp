@@ -1,7 +1,18 @@
 function update() {
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
-        let r = await fetch('/get_info/' + id);
+        let r = await fetch('/get_info/' + id, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(
+                {
+                    key: getKey(),
+                    convo_id: document.getElementById('convo_hash').value,
+                }
+            )
+        });
         if (r.ok && document.getElementById('checkbox').checked == true) {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
@@ -9,15 +20,20 @@ function update() {
     }, 1000);
 }
 
-async function handleForm(event) {
-    event.preventDefault();
-
-    let reader = new FileReader();
+function getKey() {
     let contents = '';
-    reader.onload = (e) => {
-        contents = e.target.result;
-    };
-    reader.readAsText(document.getElementById('key_file').files[0]);
+    if (document.getElementById('key_file').files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = (e) => {
+            contents = e.target.result;
+        };
+        reader.readAsText(document.getElementById('key_file').files[0]);
+    }
+    return contents;
+}
+
+async function handleForm(event) {
+    event.preventDefault();    
 
     await fetch('/send_msg', {
         method: "POST",
@@ -26,7 +42,7 @@ async function handleForm(event) {
         },
         body: JSON.stringify(
             {
-                key: contents,
+                key: getKey(),
                 convo_id: document.getElementById('convo_hash').value,
                 msg: document.getElementById('text_msg').value
             }

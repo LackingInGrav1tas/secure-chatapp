@@ -48,12 +48,13 @@ def index():
 def info():
     return render_template("info.html")
 
-@app.route('/get_info/<id>/')
-def get_info(id):
+@app.route('/get_info/', methods=["POST"])
+def get_info():
     log = pickle.loads(r.get('log'))
+    data = request.get_json()
     response = make_response(
         jsonify(
-            {'log': Message.fmt('', log[id])}
+            {'log': Message.fmt(data['key'], log[data['convo_id']])}
         ),
     )
     response.headers["Content-Type"] = "application/json"
@@ -62,17 +63,12 @@ def get_info(id):
 @app.route('/send_msg/', methods=["POST"])
 def send_msg():
     data = request.get_json()
-    key = ''
-    if 'key' in data:
-        key = data['key']
-    message = data['msg']
-    convo_id = data['convo_id']
     log = pickle.loads(r.get('log'))
-    log[convo_id].insert(0, 
+    log[data['convo_id']].insert(0, 
         Message(
             str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
-            crypto.encrypt(key, (message + '.').encode('utf-8')) if len(key) != 0 else message,
-            len(key)!=0
+            crypto.encrypt(data['key'], (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
+            len(data['key'])!=0
         )
     )
     r.set('log', pickle.dumps(log))
