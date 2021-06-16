@@ -26,6 +26,7 @@ function getKey() {
         let reader = new FileReader();
         reader.onload = (e) => {
             contents = e.target.result;
+            console.log('in onload: ' + contents);
         };
         reader.readAsText(document.getElementById('key_file').files[0]);
     }
@@ -35,7 +36,7 @@ function getKey() {
 async function handleForm(event) {
     event.preventDefault();    
     key = getKey();
-    console.log(key)
+    console.log('key: ' + key)
     await fetch('/send_msg', {
         method: "POST",
         headers: {
