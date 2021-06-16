@@ -1,10 +1,11 @@
 import datetime
 import random
 import crypto
+import hashlib
 
 class Message:
     def __init__(self, user, msg, encrypted=True):
-        self.user = user
+        self.user = hashlib.sha256(user.encode('utf-8')).hexdigest()[0:10]
         self._msg = msg
         if not encrypted: self._msg += " <unencrypted>"
         self.time = datetime.datetime.now().strftime("%x %X")
