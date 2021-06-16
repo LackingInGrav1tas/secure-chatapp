@@ -10,6 +10,8 @@ function update() {
 }
 
 async function handleForm(event) {
+    event.preventDefault();
+
     let reader = new FileReader();
     let contents = '';
     reader.onload = (e) => {
@@ -30,9 +32,6 @@ async function handleForm(event) {
             }
         )
     });
-
-    event.preventDefault();
-    window.alert('message sent!');
 }
 
 function init_form() {
