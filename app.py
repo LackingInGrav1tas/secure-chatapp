@@ -74,5 +74,9 @@ def send_msg():
     r.set('log', pickle.dumps(log))
     return make_response(jsonify(200))
 
+@app.errorhandler(500)
+def internal_error(error):
+    return "<h1> error 500:  " + repr(error) + "</h1>"
+
 if __name__ == '__main__':
     app.run(debug=True)
