@@ -72,7 +72,7 @@ def send_msg():
         )
     )
     r.set('log', pickle.dumps(log))
-    return 200
+    return "<a>:)</a>"
 
 if __name__ == '__main__':
     app.run(debug=True)
