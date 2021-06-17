@@ -38,7 +38,7 @@ async function handleForm(event) {
     event.preventDefault();    
     key = await getKey();
     console.log('key: ' + key)
-    await fetch('/send_msg', {
+    let resp = await fetch('/send_msg', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
@@ -51,6 +51,7 @@ async function handleForm(event) {
             }
         )
     });
+    console.log(resp)
 }
 
 function init_form() {

@@ -62,17 +62,20 @@ def get_info():
 
 @app.route('/send_msg/', methods=["POST"])
 def send_msg():
-    data = request.get_json()
-    log = pickle.loads(r.get('log'))
-    log[data['convo_id']].insert(0, 
-        Message(
-            str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
-            crypto.encrypt(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
-            len(data['key']) != 0
+    try:
+        data = request.get_json()
+        log = pickle.loads(r.get('log'))
+        log[data['convo_id']].insert(0, 
+            Message(
+                str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
+                crypto.encrypt(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
+                len(data['key']) != 0
+            )
         )
-    )
-    r.set('log', pickle.dumps(log))
-    return make_response(jsonify(200))
+        r.set('log', pickle.dumps(log))
+        return make_response({'code': 200})
+    except:
+        return make_response({'code': 500})
 
 @app.errorhandler(500)
 def internal_error(error):
