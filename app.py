@@ -62,8 +62,8 @@ def get_info():
 
 @app.route('/send_msg/', methods=["POST"])
 def send_msg():
-    data = request.get_json()
     return 200
+    data = request.get_json()
     log = pickle.loads(r.get('log'))
     log[data['convo_id']].insert(0, 
         Message(
