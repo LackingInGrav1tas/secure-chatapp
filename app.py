@@ -62,7 +62,6 @@ def get_info():
 
 @app.route('/send_msg/', methods=["POST"])
 def send_msg():
-    return 200
     data = request.get_json()
     log = pickle.loads(r.get('log'))
     log[data['convo_id']].insert(0, 
@@ -73,7 +72,7 @@ def send_msg():
         )
     )
     r.set('log', pickle.dumps(log))
-    return 200
+    return make_response(jsonify(200))
 
 if __name__ == '__main__':
     app.run(debug=True)
