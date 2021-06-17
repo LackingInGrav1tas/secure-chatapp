@@ -73,9 +73,9 @@ def send_msg():
             )
         )
         r.set('log', pickle.dumps(log))
-        return make_response({'code': 200})
+        return 200
     except:
-        return make_response({'code': 500})
+        return 500
 
 @app.errorhandler(500)
 def internal_error(error):
