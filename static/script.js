@@ -22,7 +22,7 @@ async function update() {
 
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
-        let prev_msgs = getElementById('txt-log').innerHTML.split('<p>').length - 1;
+        let prev_msgs = document.getElementById('txt-log').innerHTML.split('<p>').length - 1;
         let r = await fetch('/get_info/', {
             method: "POST",
             headers: {
