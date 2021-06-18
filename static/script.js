@@ -12,9 +12,17 @@ async function getKey() {
     return contents;
 }
 
+var notif = 0;
+
 async function update() {
+    window.addEventListener("mousedown", ()=> {
+        notif = 0;
+        document.title = "ChatApp";
+    });
+
     setInterval(async function() {
         let id = document.getElementById('convo_hash').value
+        let prev_msgs = getElementById('txt-log').innerHTML.split('<p>').length - 1;
         let r = await fetch('/get_info/', {
             method: "POST",
             headers: {
@@ -30,6 +38,10 @@ async function update() {
         if (r.ok && document.getElementById('checkbox').checked == true) {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
+            notif += (data.log.split('<p>').length-1) - prev_messages;
+        }
+        if (notif > 0) {
+            document.title = '(' + notif.toString() + ') ChatApp'
         }
     }, 1000);
 }
