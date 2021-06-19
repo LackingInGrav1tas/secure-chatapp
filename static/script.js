@@ -43,7 +43,7 @@ async function update() {
             notif += current_msgs - prev_msgs;
             if (current_msgs != prev_msgs) {
                 let sound = new Audio("static/notification.mp3");
-                sound.Play();
+                sound.play();
             }
         }
         if (notif > 0) {
