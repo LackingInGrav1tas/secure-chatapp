@@ -42,7 +42,7 @@ async function update() {
             let current_msgs = (data.log.split('<p>').length-1);
             notif += current_msgs - prev_msgs;
             if (current_msgs != prev_msgs) {
-                let sound = document.getElementById('notification_sound');
+                let sound = new Audio("static/notification.mp3");
                 sound.Play();
             }
         }
