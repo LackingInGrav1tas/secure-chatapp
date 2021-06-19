@@ -18,7 +18,7 @@ async function update() {
     window.addEventListener("mousedown", ()=> {
         notif = 0;
         document.title = "ChatApp";
-        document.getElementById('icon').src = 'static/favicon.ico';
+        document.getElementById('icon').href = 'static/favicon.ico';
     });
 
     setInterval(async function() {
@@ -43,7 +43,7 @@ async function update() {
         }
         if (notif > 0) {
             document.title = '(' + notif.toString() + ') ChatApp';
-            document.getElementById('icon').src = 'static/notif_icon.ico';
+            document.getElementById('icon').href = 'static/notif_icon.ico';
         }
     }, 1000);
 }
