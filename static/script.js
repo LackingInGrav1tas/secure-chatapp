@@ -39,7 +39,12 @@ async function update() {
         if (r.ok && document.getElementById('checkbox').checked == true) {
             let data = await r.json();
             document.getElementById('txt-log').innerHTML = data.log;
-            notif += (data.log.split('<p>').length-1) - prev_msgs;
+            let current_msgs = (data.log.split('<p>').length-1);
+            notif += current_msgs - prev_msgs;
+            if (current_msgs != prev_msgs) {
+                let sound = document.getElementById('notification_sound');
+                sound.Play();
+            }
         }
         if (notif > 0) {
             document.title = '(' + notif.toString() + ') ChatApp';
