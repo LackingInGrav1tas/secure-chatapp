@@ -28,9 +28,9 @@ class Message:
             except:
                 strmsg = '<message sent with different key>'
             if i % 2 == 0:
-                s += f'<p>{msg.user} <textarea readonly cols="70" rows="2" style="resize: none; overflow: auto; background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea></p>\n'
+                s += f'<p>{msg.user} <textarea readonly class="chatbox" cols="70" rows="2">{strmsg}</textarea></p>\n'
             else:
-                s += f'<p><textarea readonly cols="70" rows="2" style="resize: none; overflow: auto; background-color: grey; border-radius: 10px; font-family: Arial, Helvetica, sans-serif;">{strmsg}</textarea> {msg.user}</p>\n'
+                s += f'<p><textarea readonly class="chatbox" cols="70" rows="2">{strmsg}</textarea> {msg.user}</p>\n'
 
         return s
 

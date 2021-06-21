@@ -1,0 +1,7 @@
+textarea.chatbox {
+    resize: none;
+    overflow: auto;
+    background-color: grey;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}

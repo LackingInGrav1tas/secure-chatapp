@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatApp</title>
     <link id="icon" rel="shortcut icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <script src='static/script.js'></script>
 <!-- init_form()-->
 <body style="background-color:#323233" onload="update();">
+    
     <div style="background-color: #f3f3f3; display: flex; align-items: left; justify-content: left;">
         <div style="flex-basis: 40%;">
             <img style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: x-large; text-align: center;" src="/static/Logo.png" alt="Secure Chat App">
@@ -19,10 +21,13 @@
             <a href="/info/" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: black; text-decoration: none;">Info</a>
             <a> |</a>
         </div>
+        
         <div style="font-size: 20px; padding-left: 20px;"><p style="font-family: Verdana, Geneva, Tahoma, sans-serif;"></p></div>
     </div>
+
     <center style="color: azure;">
         <hr>
+
         <form id="msg-form" style="font-family: Arial, Helvetica, sans-serif;" enctype="multipart/form-data" method="POST">
             <label for="text_msg">Enter Text: </label>
             <input type="text" class="form-control" id="text_msg" name="text_msg" maxlength="1024" value={}>
@@ -35,15 +40,21 @@
             
             <input type="submit" value="Send Message">
         </form>
+
         <input id="checkbox" type="checkbox" checked>
         <label for="checkbox" style="font-family: Arial, Helvetica, sans-serif;">automatic updates</label>
+        
         <hr>
+
         <a style="font-family: Verdana, Geneva, Tahoma, sans-serif;" id="txt-log">
             {}
         </a>
     </center>
+
 </body>
+
 <footer style="position:fixed;bottom: 0;left:0;right:0;height:20px; background-color: aliceblue;">
     <a href="https://github.com/LackingInGrav1tas/secure-chatapp" style="font-family: Verdana, Geneva, Tahoma, sans-serif; color: black; text-decoration: none;">source code</a>
 </footer>
+
 </html>
