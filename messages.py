@@ -5,7 +5,7 @@ import hashlib
 
 class Message:
     def __init__(self, user, msg, encrypted=True):
-        self.user = hashlib.sha256(user.encode('utf-8')).hexdigest()[0:10]
+        self.user = user
         self._msg = msg
         if not encrypted: self._msg += " <unencrypted>"
         self.time = datetime.datetime.now().strftime("%x %X")
@@ -18,7 +18,7 @@ class Message:
         return "(" + self.time + " - " + self.user + "): " + self._msg
 
     @staticmethod
-    def fmt(key, lst):
+    def fmt(key, lst, clientname):
         s = ''
         i = 0
         for msg in lst:
@@ -27,7 +27,7 @@ class Message:
                 strmsg = msg.msg(key)
             except:
                 strmsg = '<message sent with different key>'
-            if i % 2 == 0:
+            if msg.user != clientname:
                 s += f'<p>{msg.user} <textarea readonly class="chatbox" cols="70" rows="2">{strmsg}</textarea></p>\n'
             else:
                 s += f'<p><textarea readonly class="chatbox" cols="70" rows="2">{strmsg}</textarea> {msg.user}</p>\n'
