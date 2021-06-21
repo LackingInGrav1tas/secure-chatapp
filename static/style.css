@@ -17,3 +17,23 @@ img.logo-image {
     font-size: x-large;
     text-align: center;
 }
+
+div.tab-header {
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-basis: 40%;
+}
+
+footer.footer {
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background-color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    text-decoration: none;
+}
