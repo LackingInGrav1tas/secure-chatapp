@@ -5,3 +5,15 @@ textarea.chatbox {
     border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+a.tab-link {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: black;
+    text-decoration: none;
+}
+
+img.logo-image {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: x-large;
+    text-align: center;
+}
