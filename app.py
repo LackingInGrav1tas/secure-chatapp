@@ -58,7 +58,7 @@ def get_info():
     data = request.get_json()
     response = make_response(
         jsonify(
-            {'log': Message.fmt(data['key'], log[data['convo_id']])}
+            {'log': Message.fmt(data['key'], log[data['convo_id']], client_name())}
         ),
     )
     response.headers["Content-Type"] = "application/json"
