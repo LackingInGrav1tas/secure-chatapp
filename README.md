@@ -10,3 +10,8 @@ NOTE: encryption is serverside NOT clientside. Because of this, it relies on Her
 -----------------------------------
 
 The logs get first serialized then stored in redis (```r.set('log', pickle.dumps(log))```) because i dont think redis supports storage of 2D objects (```log``` is a hashmap containing lists)
+
+
+-----------------------------------
+
+![image](https://user-images.githubusercontent.com/42680395/126934701-b6c5bb4e-8f5f-43e8-86bb-e0f667625ac8.png)
