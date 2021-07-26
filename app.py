@@ -17,7 +17,7 @@ log = {
 r.set('log', pickle.dumps(log))
 
 def client_name():
-    return hashlib.sha256(str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)).encode('utf-8')).hexdigest()[0:10]
+    return hashlib.sha256(str(request.environ['REMOTE_ADDR']).encode('utf-8')).hexdigest()[0:10]
 
 @app.route('/', methods=["GET", "POST"])
 def index():
