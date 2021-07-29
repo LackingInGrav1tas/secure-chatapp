@@ -102,10 +102,11 @@ def erase_log(id):
 def erase():
     data = request.get_json()
     thread = threading.Thread(target=erase_log, args=[data['id']])
+    thread.start()
     erasing = redis_get('erasing')
     erasing.append(thread.ident)
     redis_set('erasing', erasing)
-    log = r.get('log')
+    log = pickle.loads(r.get('log'))
     log[data['id']].insert(0, 
         Message(
             "  SERVER  ",
@@ -113,13 +114,12 @@ def erase():
             False
         )
     )
-    r.set('log', log)
+    r.set('log', pickle.dumps(log))
     return 0
 
 @app.route('/dont_erase/')
 def dont_erase():
     data = request.get_json()
-    thread = threading.Thread(target=erase_log, args=[data['id']])
     erasing = redis_get('erasing')
     if erasing.contains(data['id']):
         erasing.remove(data['id'])
