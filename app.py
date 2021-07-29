@@ -13,11 +13,19 @@ server_id = random_string(10)
 REDIS_URL = os.environ['REDIS_URL']
 REDIS_CHAN = 'chat'
 r = redis.from_url(REDIS_URL)
+
+def redis_set(key, obj):
+    r.set(key, pickle.dumps(obj))
+
+def redis_get(key):
+    return pickle.loads(r.get(key))
+
 log = {
     '0000': list() # general 
 }
+
 r.set('log', pickle.dumps(log))
-r.set('erasing', [])
+redis_set('erasing', [])
 
 def client_name():
     return hashlib.sha256(str(request.environ['REMOTE_ADDR']).encode('utf-8')).hexdigest()[0:10]
@@ -84,7 +92,7 @@ def send_msg():
 def erase_log(id):
     for i in range(60):
         time.sleep(1)
-        if not r.get('erasing').contains(id):
+        if not redis_get('erasing').contains(id):
             return
     log = pickle.loads(r.get('log'))
     log.remove(id)
@@ -94,9 +102,9 @@ def erase_log(id):
 def erase():
     data = request.get_json()
     thread = threading.Thread(target=erase_log, args=[data['id']])
-    erasing = r.get('erasing')
+    erasing = redis_get('erasing')
     erasing.append(thread.ident)
-    r.set('erasing', erasing)
+    redis_set('erasing', erasing)
     log = r.get('log')
     log[data['id']].insert(0, 
         Message(
@@ -112,7 +120,7 @@ def erase():
 def dont_erase():
     data = request.get_json()
     thread = threading.Thread(target=erase_log, args=[data['id']])
-    erasing = r.get('erasing')
+    erasing = redis_get('erasing')
     if erasing.contains(data['id']):
         erasing.remove(data['id'])
         log = r.get('log')
@@ -124,7 +132,7 @@ def dont_erase():
             )
         )
         r.set('log', log)
-    r.set('erasing', erasing)
+    redis_set('erasing', erasing)
     return 0
 
 if __name__ == '__main__':
