@@ -17,3 +17,8 @@ img.logo-image {
     font-size: x-large;
     text-align: center;
 }
+
+#txt-log {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: scroll;
+}
