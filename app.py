@@ -117,7 +117,7 @@ def erase():
     r.set('log', pickle.dumps(log))
     return ""
 
-@app.route('/dont_erase/')
+@app.route('/dont_erase/', methods=["POST"])
 def dont_erase():
     data = request.get_json()
     erasing = redis_get('erasing')
