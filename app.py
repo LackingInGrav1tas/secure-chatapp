@@ -110,7 +110,7 @@ def erase():
     log[data['id']].insert(0, 
         Message(
             "  SERVER  ",
-            "A user has initiated a deletion seqence for this conversation. It will be deleted in 60 seconds unless at least 1 user selects the \"don't erase\" button",
+            "A user has attempted to delete this conversation. If you would like to stop this action click the 'don't erase' button",
             False
         )
     )

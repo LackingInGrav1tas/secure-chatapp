@@ -76,6 +76,7 @@ async function handleForm(event) {
 async function erase() {
     let choice = confirm("This action will result in the permanent erasure of this conversation id's logs.");
     if (choice) {
+        console.log('sending fetch');
         let resp = await fetch('/erase', {
             method: "POST",
             headers: {
@@ -87,6 +88,7 @@ async function erase() {
                 }
             )
         });
+        console.log("received response");
     }
 }
 
