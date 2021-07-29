@@ -103,6 +103,7 @@ def erase():
     data = request.get_json()
     thread = threading.Thread(target=erase_log, args=[data['id']])
     thread.start()
+    return 0
     erasing = redis_get('erasing')
     erasing.append(thread.ident)
     redis_set('erasing', erasing)
