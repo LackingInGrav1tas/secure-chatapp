@@ -73,6 +73,37 @@ async function handleForm(event) {
     console.log(resp)
 }
 
+async function erase() {
+    let choice = confirm("This action will result in the permanent erasure of this conversation id's logs.");
+    if (choice) {
+        let resp = await fetch('/erase', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(
+                {
+                    id: document.getElementById('convo_hash').value
+                }
+            )
+        });
+    }
+}
+
+async function dont_erase() {
+    let resp = await fetch('/dont_erase', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(
+            {
+                id: document.getElementById('convo_hash').value
+            }
+        )
+    });
+}
+
 function init_form() {
     document.getElementById('msg-form').addEventListener('submit', handleForm);
 }

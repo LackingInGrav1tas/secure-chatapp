@@ -5,6 +5,8 @@ import redis
 import os
 import pickle
 import hashlib
+import threading
+import time
 
 app = Flask(__name__)
 server_id = random_string(10)
@@ -15,6 +17,7 @@ log = {
     '0000': list() # general 
 }
 r.set('log', pickle.dumps(log))
+r.set('erasing', [])
 
 def client_name():
     return hashlib.sha256(str(request.environ['REMOTE_ADDR']).encode('utf-8')).hexdigest()[0:10]
@@ -77,6 +80,52 @@ def send_msg():
     )
     r.set('log', pickle.dumps(log))
     return 200
+
+def erase_log(id):
+    for i in range(60):
+        time.sleep(1)
+        if not r.get('erasing').contains(id):
+            return
+    log = pickle.loads(r.get('log'))
+    log.remove(id)
+    r.set('log', pickle.dumps(log))
+
+@app.route('/erase/', methods=["POST"])
+def erase():
+    data = request.get_json()
+    thread = threading.Thread(target=erase_log, args=[data['id']])
+    erasing = r.get('erasing')
+    erasing.append(thread.ident)
+    r.set('erasing', erasing)
+    log = r.get('log')
+    log[data['id']].insert(0, 
+        Message(
+            "  SERVER  ",
+            "A user has initiated a deletion seqence for this conversation. It will be deleted in 60 seconds unless at least 1 user selects the \"don't erase\" button",
+            False
+        )
+    )
+    r.set('log', log)
+    return 0
+
+@app.route('/dont_erase/')
+def dont_erase():
+    data = request.get_json()
+    thread = threading.Thread(target=erase_log, args=[data['id']])
+    erasing = r.get('erasing')
+    if erasing.contains(data['id']):
+        erasing.remove(data['id'])
+        log = r.get('log')
+        log[data['id']].insert(0, 
+            Message(
+                "  SERVER  ",
+                "Deletion cancelled.",
+                False
+            )
+        )
+        r.set('log', log)
+    r.set('erasing', erasing)
+    return 0
 
 if __name__ == '__main__':
     app.run(debug=True)
