@@ -21,4 +21,6 @@ img.logo-image {
 #txt-log {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     overflow: scroll;
+    height: 65vh;
+    background-color: aqua;
 }
