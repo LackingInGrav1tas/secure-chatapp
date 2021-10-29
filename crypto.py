@@ -2,7 +2,7 @@ from Crypto.Cipher import AES
 
 def handle(key, text):
     try:
-        (encrypt(key, text), True)
+        return (encrypt(key, text), True)
     except:
         return ("user tried to encrypt with bad key", False)
 
