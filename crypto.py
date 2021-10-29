@@ -2,9 +2,9 @@ from Crypto.Cipher import AES
 
 def handle(key, text):
     try:
-        encrypt(key, text)
+        (encrypt(key, text), True)
     except:
-        return "user tried to encrypt with bad key"
+        return ("user tried to encrypt with bad key", False)
 
 def encrypt(key, text):
     cipher = AES.new(key, AES.MODE_EAX)

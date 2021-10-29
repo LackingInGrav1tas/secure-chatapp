@@ -45,11 +45,12 @@ def index():
         key = f.read()
 
         if len(request.form["text_msg"]) > 0:
+            msg = crypto.handle(key, (request.form["text_msg"] + '.').encode('utf-8')) if len(key) != 0 else (request.form["text_msg"], False)
             log[request.form["convo_hash"]].insert(0, 
                 Message(
                     client_name(),
-                    crypto.handle(key, (request.form["text_msg"] + '.').encode('utf-8')) if len(key) != 0 else request.form["text_msg"],
-                    len(key)!=0
+                    msg[0],
+                    msg[1]
                 )
             )
         convo_hash = request.form['convo_hash']
@@ -79,11 +80,12 @@ def get_info():
 def send_msg():
     data = request.get_json()
     log = pickle.loads(r.get('log'))
+    msg = crypto.handle(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else (data['msg'], False)
     log[data['convo_id']].insert(0, 
         Message(
             str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
-            crypto.handle(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
-            len(data['key']) != 0
+            msg[0],
+            msg[1]
         )
     )
     r.set('log', pickle.dumps(log))
