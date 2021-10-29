@@ -1,5 +1,11 @@
 from Crypto.Cipher import AES
 
+def handle(key, text):
+    try:
+        encrypt(key, text)
+    except:
+        return "user tried to encrypt with bad key"
+
 def encrypt(key, text):
     cipher = AES.new(key, AES.MODE_EAX)
     cyphertext, tag = cipher.encrypt_and_digest(text)

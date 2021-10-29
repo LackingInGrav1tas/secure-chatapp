@@ -48,7 +48,7 @@ def index():
             log[request.form["convo_hash"]].insert(0, 
                 Message(
                     client_name(),
-                    crypto.encrypt(key, (request.form["text_msg"] + '.').encode('utf-8')) if len(key) != 0 else request.form["text_msg"],
+                    crypto.handle(key, (request.form["text_msg"] + '.').encode('utf-8')) if len(key) != 0 else request.form["text_msg"],
                     len(key)!=0
                 )
             )
@@ -82,7 +82,7 @@ def send_msg():
     log[data['convo_id']].insert(0, 
         Message(
             str(request.environ.get('HTTP_X_REAL_IP', request.remote_addr)),
-            crypto.encrypt(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
+            crypto.handle(data['key'].encode('utf-8'), (data['msg'] + '.').encode('utf-8')) if len(data['key']) != 0 else data['msg'],
             len(data['key']) != 0
         )
     )
