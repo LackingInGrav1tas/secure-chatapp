@@ -89,7 +89,16 @@ def send_msg():
         )
     )
     r.set('log', pickle.dumps(log))
-    return 200
+
+    log = pickle.loads(r.get('log'))
+    data = request.get_json()
+    response = make_response(
+        jsonify(
+            {'log': Message.fmt(data['key'], log[data['convo_id']], client_name())}
+        ),
+    )
+    response.headers["Content-Type"] = "application/json"
+    return response
 
 def erase_log(id):
     for i in range(60):

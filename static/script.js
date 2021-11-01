@@ -22,7 +22,6 @@ async function update() {
     });
 
     setInterval(async function() {
-        console.log("\"" + await getKey() + "\"");
         let id = document.getElementById('convo_hash').value
         let prev_msgs = document.getElementById('txt-log').innerHTML.split('<p>').length - 1;
         let r = await fetch('/get_info/', {
@@ -59,9 +58,8 @@ async function update() {
 
 
 async function handleForm(event) {
-    event.preventDefault();    
-    key = await getKey();
-    console.log('key: ' + key)
+    event.preventDefault();
+    let prev_msgs = document.getElementById('txt-log').innerHTML.split('<p>').length - 1;
     let resp = await fetch('/send_msg', {
         method: "POST",
         headers: {
@@ -69,13 +67,22 @@ async function handleForm(event) {
         },
         body: JSON.stringify(
             {
-                key: key,
+                key: await getKey(),
                 convo_id: document.getElementById('convo_hash').value,
                 msg: document.getElementById('text_msg').value
             }
         )
     });
-    console.log(resp)
+    if (resp.ok) {
+        let data = await r.json();
+        document.getElementById('txt-log').innerHTML = data.log;
+        let current_msgs = (data.log.split('<p>').length-1);
+        notif += current_msgs - prev_msgs;
+        if (current_msgs !== prev_msgs) {
+            let sound = new Audio("static/notification.mp3");
+            sound.play();
+        }
+    }
 }
 
 async function erase() {
