@@ -22,6 +22,7 @@ async function update() {
     });
 
     setInterval(async function() {
+        window.alert(await getKey());
         let id = document.getElementById('convo_hash').value
         let prev_msgs = document.getElementById('txt-log').innerHTML.split('<p>').length - 1;
         let r = await fetch('/get_info/', {
@@ -52,6 +53,10 @@ async function update() {
         }
     }, 1000);
 }
+
+
+// EVERYTHING BELOW NOT IN USE
+
 
 async function handleForm(event) {
     event.preventDefault();    
