@@ -6,7 +6,7 @@ async function getKey() {
             reader.onload = (e) => {
                 resolve(e.target.result);
             };
-            reader.readAsText(document.getElementById('key_file').files[0]);
+            reader.readAsBinaryString(document.getElementById('key_file').files[0]);
         });
     }
     return contents;
