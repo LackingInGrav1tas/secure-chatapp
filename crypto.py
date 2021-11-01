@@ -4,7 +4,7 @@ def handle(key, text):
     try:
         return (encrypt(key, text), True)
     except:
-        return ("user tried to encrypt with bad key", False)
+        return ("user tried to encrypt with bad key: " + len(key), False)
 
 def encrypt(key, text):
     cipher = AES.new(key, AES.MODE_EAX)
