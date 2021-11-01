@@ -60,6 +60,8 @@ async function update() {
 async function handleForm(event) {
     event.preventDefault();
     let prev_msgs = document.getElementById('txt-log').innerHTML.split('<p>').length - 1;
+    let key = await getKey();
+    console.log('key: ' + key + '\nsize: ' + key.length);
     let resp = await fetch('/send_msg', {
         method: "POST",
         headers: {
@@ -67,7 +69,7 @@ async function handleForm(event) {
         },
         body: JSON.stringify(
             {
-                key: await getKey(),
+                key: key,
                 convo_id: document.getElementById('convo_hash').value,
                 msg: document.getElementById('text_msg').value
             }
