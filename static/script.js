@@ -74,7 +74,7 @@ async function handleForm(event) {
         )
     });
     if (resp.ok) {
-        let data = await r.json();
+        let data = await resp.json();
         document.getElementById('txt-log').innerHTML = data.log;
         let current_msgs = (data.log.split('<p>').length-1);
         notif += current_msgs - prev_msgs;
