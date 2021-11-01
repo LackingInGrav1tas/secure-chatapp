@@ -4,7 +4,11 @@ def handle(key, text):
     try:
         return (encrypt(key, text), True)
     except:
-        return ("user tried to encrypt with bad key" + len(key), False)
+        try:
+            return ("user tried to encrypt with bad key" + len(key), False)
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            return template.format(type(ex).__name__, ex.args)
 
 def encrypt(key, text):
     cipher = AES.new(key, AES.MODE_EAX)
