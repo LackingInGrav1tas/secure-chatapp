@@ -2,8 +2,6 @@ textarea.chatbox {
     resize: none;
     overflow: auto;
     background-color: #f3f3f3;
-    outline-style: none;
-    border-radius: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
